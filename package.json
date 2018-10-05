@@ -1,0 +1,33 @@
+{
+  "name": "promise-cache",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "eslint": "standard",
+    "test": "karma start --single-run",
+    "test:event": "node src/Event-Driver/test/index.js",
+    "test:model": "node src/Model/test/index.js",
+    "test:watch": "karma start"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://git.migum.eu/Mighty683/promise-cache.git"
+  },
+  "devDependencies": {
+    "istanbul-instrumenter-loader": "^3.0.1",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-coverage-istanbul-reporter": "^2.0.1",
+    "karma-jasmine": "^1.1.2",
+    "karma-webpack": "^3.0.0",
+    "puppeteer": "^1.5.0",
+    "standard": "^11.0.1",
+    "webpack": "^4.16.1"
+  },
+  "author": "",
+  "license": "ISC"
+}

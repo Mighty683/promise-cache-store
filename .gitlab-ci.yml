@@ -1,0 +1,12 @@
+image: node:8
+
+cache: 
+  paths:
+    - node_modules/
+test:
+  stage: test
+  before_script: 
+    - npm install
+  script:
+    - npm run eslint
+    - npm run test
