@@ -16,6 +16,7 @@ Get request will be called only once, get function will return result of initial
 
 ### Constructor
 Create cache store with passed options.
+
 | Param     | Value                                       | Description                 | Required |
 | --------- | ------------------------------------------- | --------------------------- | -------- |
 | store     | Array<{key: string, action: () => Promise}> | Array of predefined actions | false    |
