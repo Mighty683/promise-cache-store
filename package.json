@@ -28,6 +28,17 @@
     "standard": "^11.0.1",
     "webpack": "^4.16.1"
   },
+  "standard": {
+    "globals": [
+      "describe",
+      "beforeEach",
+      "spyOn",
+      "it",
+      "expect",
+      "jasmine",
+      "afterEach"
+    ]
+  },
   "author": "",
   "license": "ISC"
 }
