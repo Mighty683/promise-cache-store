@@ -16,20 +16,22 @@ Get request will be called only once, get function will return result of initial
 
 ### Constructor
 Create cache store with passed options.
-| Param | Value         | Description | Required |
-| ----- | ------------- | ----------- | -------- |
-| store | Array<{key: string, action: Function<Promise>}> | Array of predefined actions | false |
-| cacheTime | Number | Valid age of cached value | false |
+| Param     | Value                                       | Description                 | Required |
+| --------- | ------------------------------------------- | --------------------------- | -------- |
+| store     | Array<{key: string, action: () => Promise}> | Array of predefined actions | false    |
+| cacheTime | Number                                      | Valid age of cached value   | false    |
 
 ### set
+Add new key to cache.
 
-| Param | Value         | Description | Required |
-| ----- | ------------- | ----------- | -------- |
-| key   | string        | key value for new cache | true |
-| action | () => Promise | function returning promise | true |
-| options | {} | todo | false |
+| Param   | Value         | Description                | Required |
+| ------- | ------------- | -------------------------- | -------- |
+| key     | string        | key value for new cache    | true     |
+| action  | () => Promise | function returning promise | true     |
+| options | {}            | TODO                       | false    |
 
 ### get
+Get data from key.
 
 | Param | Value         | Description | Required |
 | ----- | ------------- | ----------- | -------- |
