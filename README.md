@@ -2,10 +2,14 @@
 
 ## Cache store for Promise execution
 
+[![pipeline status](https://git.migum.eu/migum/promise-cache/badges/master/pipeline.svg)](https://git.migum.eu/migum/promise-cache/commits/master)
+[![coverage report](https://git.migum.eu/migum/promise-cache/badges/master/coverage.svg)](https://git.migum.eu/migum/promise-cache/commits/master)
+
 Mainly designed as store for cache request.
 ```
 npm install promise-cache-store
 ```
+
 Example: 
 ```js
   const cache = new CacheStore([] , 60)
