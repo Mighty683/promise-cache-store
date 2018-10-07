@@ -10,7 +10,6 @@
     "test:model": "node src/Model/test/index.js",
     "test:watch": "karma start"
   },
-
   "repository": {
     "type": "git",
     "url": "https://git.migum.eu/Mighty683/promise-cache.git"

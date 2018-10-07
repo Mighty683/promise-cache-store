@@ -28,8 +28,8 @@ Add new key to cache.
 | Param   | Value         | Description                | Required |
 | ------- | ------------- | -------------------------- | -------- |
 | key     | string        | key value for new cache    | true     |
-| action  | () => Promise | function returning promise | true     |
-| options | {}            | TODO                       | false    |
+| options.action  | () => Promise | function returning promise | true     |
+| options.updateArray | [string]           | Keys to mark for update. Marked key will be forced to update on next call.                       | false    |
 
 ### get
 Get data from key.
@@ -38,3 +38,31 @@ Get data from key.
 | ----- | ------------- | ----------- | -------- |
 | key   | string        | key value for cache | true |
 | options.refresh | boolean | Force call to refresh cache | false |
+
+
+### Examples
+
+For more examples check test folder.
+
+Update array:
+On call you are able to mark another keys for update. On next call marked keys will update result.
+
+```js
+var testCache = new PromiseCache([
+  {
+    key: 'key_2',
+    action: () => Promise.resolve('1'),
+    data: '2'
+  },
+  {
+    key: 'key_3',
+    action: () => Promise.resolve(),
+    updateArray: ['key_2']
+  }
+])
+const result1 = await testCache.get('key_2')
+/* result1 = '2' */
+await testCache.get('key_3')
+const result2 = await testCache.get('key_2')
+/* result2 = '1' */
+```

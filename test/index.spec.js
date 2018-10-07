@@ -5,6 +5,42 @@ describe('store helper', () => {
     expect(PromiseCache).toBeDefined()
   })
 
+  describe('refresh mark', function () {
+    beforeEach(function () {
+      this.fun1 = function () {
+      }
+      this.error = new Error()
+      spyOn(this, 'fun1').and.returnValue(Promise.resolve('1'))
+      this.testStore = [
+        {
+          key: 'key_2',
+          action: this.fun1,
+          data: '2'
+        },
+        {
+          key: 'key_3',
+          action: () => Promise.resolve(),
+          updateArray: ['key_2']
+        }
+      ]
+      this.testCache = new PromiseCache(this.testStore, {
+        cacheTime: 100
+      })
+    })
+
+    it('should update result of another key after call', function (done) {
+      this.testCache.get('key_2').then(result => {
+        expect(result).toBe('2')
+        this.testCache.get('key_3').then(() => {
+          this.testCache.get('key_2').then(result => {
+            expect(result).toBe('1')
+            done()
+          })
+        })
+      })
+    })
+  })
+
   describe('get', function () {
     beforeEach(function () {
       this.fun1 = function () {
@@ -103,17 +139,52 @@ describe('store helper', () => {
     })
 
     it('should add key to store', function () {
-      this.testCache.set('key_2', () => Promise.resolve())
+      this.testCache.set('key_2', {
+        action: () => Promise.resolve()
+      })
       expect(this.testCache.store.length).toBe(2)
     })
 
+    it('should update key in store', function (done) {
+      this.testFun = () => {}
+      spyOn(this, 'testFun').and.returnValue(Promise.resolve('result'))
+      this.testCache.set('key_1', {
+        action: this.testFun
+      })
+      this.testCache.get('key_1').then(result => {
+        expect(result).toBe('result')
+        expect(this.testFun).toHaveBeenCalled()
+        done()
+      })
+    })
+
     it('should add key to store with proper action', function (done) {
-      this.testCache.set('key_2', () => Promise.resolve('2'))
+      this.testCache.set('key_2', {
+        action: () => Promise.resolve('2')
+      })
       this.testCache.get('key_2').then(result => {
         expect(result).toBe('2')
         done()
       })
       expect(this.testCache.store.length).toBe(2)
+    })
+  })
+
+  describe('remove', function () {
+    beforeEach(function () {
+      this.testStore = [
+        {
+          key: 'key_1'
+        }
+      ]
+      this.testCache = new PromiseCache(this.testStore, {
+        cacheTime: 100
+      })
+    })
+
+    it('should remove key from store', function () {
+      this.testCache.remove('key_1')
+      expect(this.testCache.store.length).toBe(0)
     })
   })
 })
