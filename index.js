@@ -1,21 +1,21 @@
 class PromiseCache {
   constructor (store, options) {
-    this.store = store
+    this.store = store || []
     this.cacheTime = options && options.cacheTime
   }
-  
-  _updateElement(element, options) {
+
+  _updateElement (element, options) {
     element.action = options.action
     element.updateArray = options.updateArray
   }
-  _addElement(key, options) {
+  _addElement (key, options) {
     this.store.push({
       key,
       ...options
     })
   }
-  
-  _callAction(element) {
+
+  _callAction (element) {
     if (element.updateArray && element.updateArray instanceof Array) {
       element.updateArray.forEach(
         keyToRefresh => {
@@ -27,7 +27,7 @@ class PromiseCache {
     return element.action()
   }
 
-  _markRefresh(key) {
+  _markRefresh (key) {
     this.getElementByKey(key).refresh = true
   }
 
@@ -81,7 +81,7 @@ class PromiseCache {
     })
   }
 
-  remove(key) {
+  remove (key) {
     const index = this.store.findIndex(element => element.key === key)
     if (index !== -1) {
       this.store.splice(index, 1)

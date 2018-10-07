@@ -3,7 +3,9 @@
 ## Cache store for Promise execution
 
 Mainly designed as store for cache request.
-
+```
+npm install promise-cache-store
+```
 Example: 
 ```js
   const cache = new CacheStore([] , 60)
